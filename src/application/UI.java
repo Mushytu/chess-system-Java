@@ -1,6 +1,10 @@
 package application;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import chess.ChessPiece;
+import chess.ChessPosition;
 import chess.Color;
 
 public class UI {
@@ -28,6 +32,17 @@ public class UI {
 
 	// boilerplate (colors) source:
 	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
+
+	public static ChessPosition readChessPosition(Scanner sc1) {
+		try {
+			String stringFormattedPosition = sc1.nextLine();
+			char column = stringFormattedPosition.charAt(0);
+			Integer row = Integer.parseInt(stringFormattedPosition.substring(1));
+			return new ChessPosition(column, row);
+		} catch (RuntimeException e1) {
+			throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8");
+		}
+	}
 
 	public static void printBoard(ChessPiece[][] pieces) {
 		for (int i = 0; i < pieces.length; i++) {
