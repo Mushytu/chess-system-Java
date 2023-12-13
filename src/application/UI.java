@@ -49,27 +49,51 @@ public class UI {
 			throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8");
 		}
 	}
-
+	
+	//	board printing
 	public static void printBoard(ChessPiece[][] pieces) {
+		// columns index (above)
+		System.out.println(ANSI_RED + "X" + ANSI_RESET + 
+						ANSI_CYAN + " a|b|c|d|e|f|g|h " + ANSI_RESET + 
+						ANSI_RED + "X" + ANSI_RESET);
+		
+		// table
+		// rows index (right and left)
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.printf(ANSI_CYAN + "%d %s", 8 - i, ANSI_RESET);
 			for (int j = 0; j < pieces.length; j++) {
 				printPiece(pieces[i][j], false);
 			}
-			System.out.println();
+			System.out.printf(ANSI_CYAN + "%d %s\n", 8 - i, ANSI_RESET);
 		}
-		System.out.println(ANSI_CYAN + "  a|b|c|d|e|f|g|h" + ANSI_RESET);
+		
+		// columns index (below)
+		System.out.println(ANSI_RED + "X" + ANSI_RESET + 
+						ANSI_CYAN + " a|b|c|d|e|f|g|h " + ANSI_RESET + 
+						ANSI_RED + "X" + ANSI_RESET);
 	}
-
+	
+	// board print showing possible moves
 	public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+		// columns index (above)
+		System.out.println(ANSI_RED + "X" + ANSI_RESET + 
+						ANSI_CYAN + " a|b|c|d|e|f|g|h " + ANSI_RESET + 
+						ANSI_RED + "X" + ANSI_RESET);
+
+		// table
+		// rows index (right and left)
 		for (int i = 0; i < pieces.length; i++) {
 			System.out.printf(ANSI_CYAN + "%d %s", 8 - i, ANSI_RESET);
 			for (int j = 0; j < pieces.length; j++) {
 				printPiece(pieces[i][j], possibleMoves[i][j]);
 			}
-			System.out.println();
+			System.out.printf(ANSI_CYAN + "%d %s\n", 8 - i, ANSI_RESET);
 		}
-		System.out.println(ANSI_CYAN + "  a|b|c|d|e|f|g|h" + ANSI_RESET);
+		
+		// columns index (below)
+		System.out.println(ANSI_RED + "X" + ANSI_RESET + 
+						ANSI_CYAN + " a|b|c|d|e|f|g|h " + ANSI_RESET + 
+						ANSI_RED + "X" + ANSI_RESET);
 	}
 
 	private static void printPiece(ChessPiece piece, boolean background) {
