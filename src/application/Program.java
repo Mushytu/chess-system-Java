@@ -24,6 +24,10 @@ public class Program {
 			System.out.print("\nSource: ");
 			ChessPosition source = UI.readChessPosition(sc1);
 			
+			boolean[][] possibleMoves = match.possibleMoves(source);
+			UI.clearScreen();
+			UI.printBoard(match.getPieces(), possibleMoves);
+	
 			System.out.print("\nTarget: ");
 			ChessPosition target = UI.readChessPosition(sc1);
 			
@@ -34,7 +38,7 @@ public class Program {
 			} catch(InputMismatchException e2) {
 				System.out.println(e2.getMessage());
 				sc1.nextLine();
-			}
+			}	
 		}
 	}
 
