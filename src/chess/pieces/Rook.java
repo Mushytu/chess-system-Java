@@ -19,49 +19,31 @@ public class Rook extends ChessPiece {
 	@Override
 	public boolean[][] possibleMoves() {
 		boolean[][] matrix = new boolean[getBoard().getRows()][getBoard().getColumns()];
-
 		Position auxPosition = new Position(0, 0);
 
 		// above
-		auxPosition.setValues(position.getRow() - 1, position.getColumn());
-		while (getBoard().positionExists(auxPosition) && !getBoard().thereIsAPiece(auxPosition)) {
-			matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
-			auxPosition.setRow(auxPosition.getRow() - 1);
-		}
-		if (getBoard().positionExists(auxPosition) && isThereOpponentPiece(auxPosition)) {
-			matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
-		}
+		possibleMovePointer(auxPosition, matrix, -1, 0);
 
 		// left
-		auxPosition.setValues(position.getRow(), position.getColumn() - 1);
-		while (getBoard().positionExists(auxPosition) && !getBoard().thereIsAPiece(auxPosition)) {
-			matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
-			auxPosition.setColumn(auxPosition.getColumn() - 1);
-		}
-		if (getBoard().positionExists(auxPosition) && isThereOpponentPiece(auxPosition)) {
-			matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
-		}
+		possibleMovePointer(auxPosition, matrix, 0, -1);
 
 		// right
-		auxPosition.setValues(position.getRow(), position.getColumn() + 1);
-		while (getBoard().positionExists(auxPosition) && !getBoard().thereIsAPiece(auxPosition)) {
-			matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
-			auxPosition.setColumn(auxPosition.getColumn() + 1);
-		}
-		if (getBoard().positionExists(auxPosition) && isThereOpponentPiece(auxPosition)) {
-			matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
-		}
+		possibleMovePointer(auxPosition, matrix, 0, 1);
 
 		// below
-		auxPosition.setValues(position.getRow() + 1, position.getColumn());
-		while (getBoard().positionExists(auxPosition) && !getBoard().thereIsAPiece(auxPosition)) {
-			matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
-			auxPosition.setRow(auxPosition.getRow() + 1);
-		}
-		if (getBoard().positionExists(auxPosition) && isThereOpponentPiece(auxPosition)) {
-			matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
-		}
+		possibleMovePointer(auxPosition, matrix, 1, 0);
 
 		return matrix;
 	}
+
+	// specific Rook method
+	@Override
+	public void possibleMovePointer(Position auxPosition, boolean[][] matrix, int rowsOperator, int columnsOperator) {
+		auxPosition.setValues(position.getRow() + rowsOperator, position.getColumn() + columnsOperator);
+
+		if (!getBoard().thereIsAPiece(auxPosition)) {
+			super.possibleMovePointer(auxPosition, matrix, rowsOperator, columnsOperator);
+		}
+	}
+
 }
