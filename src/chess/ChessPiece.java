@@ -17,6 +17,10 @@ public abstract class ChessPiece extends Piece {
 		return color;
 	}
 	
+	public ChessPosition getChessPosition() {
+		return ChessPosition.fromPosition(position);
+	}
+	
 	protected boolean isThereOpponentPiece(Position position) {
 		ChessPiece p = (ChessPiece)getBoard().piece(position);
 		return p != null && p.getColor() != color;
@@ -25,7 +29,7 @@ public abstract class ChessPiece extends Piece {
 	public void possibleMovePointer(Position auxPosition, boolean[][] matrix, int rowsOperator, int columnsOperator) {
 		
 		// empty position check
-		while (getBoard().positionExists(auxPosition)) {
+		while (getBoard().positionExists(auxPosition) && !getBoard().thereIsAPiece(auxPosition)) {
 			matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
 			// Cartesian coordinate system
 			auxPosition.setRow(auxPosition.getRow() + rowsOperator);

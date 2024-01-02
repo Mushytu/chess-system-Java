@@ -41,9 +41,8 @@ public class Rook extends ChessPiece {
 	public void possibleMovePointer(Position auxPosition, boolean[][] matrix, int rowsOperator, int columnsOperator) {
 		auxPosition.setValues(position.getRow() + rowsOperator, position.getColumn() + columnsOperator);
 
-		if (!getBoard().thereIsAPiece(auxPosition)) {
 			super.possibleMovePointer(auxPosition, matrix, rowsOperator, columnsOperator);
-		}
+		
 	}
 
 }

@@ -47,7 +47,7 @@ public class UI {
 		try {
 			String stringFormattedPosition = sc1.nextLine();
 			char column = stringFormattedPosition.charAt(0);
-			Integer row = Integer.parseInt(stringFormattedPosition.substring(1));
+			int row = Integer.parseInt(stringFormattedPosition.substring(1));
 			return new ChessPosition(column, row);
 		} catch (RuntimeException e1) {
 			throw new InputMismatchException("Error reading ChessPosition. Valid values are from a1 to h8");
@@ -65,6 +65,10 @@ public class UI {
 			System.out.println("Waiting player: " + ANSI_YELLOW + chessMatch.getCurrentPlayer() + ANSI_RESET);
 		} else {
 			System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());	
+		}
+		
+		if(chessMatch.getCheck()) {
+			System.out.println("CHECK!");
 		}
 	}
 	
