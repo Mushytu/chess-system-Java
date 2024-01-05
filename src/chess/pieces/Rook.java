@@ -20,29 +20,36 @@ public class Rook extends ChessPiece {
 	public boolean[][] possibleMoves() {
 		boolean[][] matrix = new boolean[getBoard().getRows()][getBoard().getColumns()];
 		Position auxPosition = new Position(0, 0);
+		boolean longMovCheck = false;
 
 		// above
-		possibleMovePointer(auxPosition, matrix, -1, 0);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, -1, 0);
 
 		// left
-		possibleMovePointer(auxPosition, matrix, 0, -1);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, 0, -1);
 
 		// right
-		possibleMovePointer(auxPosition, matrix, 0, 1);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, 0, 1);
 
 		// below
-		possibleMovePointer(auxPosition, matrix, 1, 0);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, 1, 0);
 
 		return matrix;
 	}
 
 	// specific Rook method
-	@Override
-	public void possibleMovePointer(Position auxPosition, boolean[][] matrix, int rowsOperator, int columnsOperator) {
+	public void possibleMovePointer(Position auxPosition, boolean[][] matrix,
+			boolean longMovCheck, int rowsOperator, int columnsOperator) {
 		auxPosition.setValues(position.getRow() + rowsOperator, position.getColumn() + columnsOperator);
-
-			super.possibleMovePointer(auxPosition, matrix, rowsOperator, columnsOperator);
 		
+		// can piece make long moves?
+		longMovCheck = true;
+		
+		while (getBoard().positionExists(auxPosition) && !getBoard().thereIsAPiece(auxPosition)) {
+			super.possibleMovePointer(auxPosition, matrix, longMovCheck, rowsOperator,
+					columnsOperator);
+		}
+
 	}
 
 }

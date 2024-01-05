@@ -5,7 +5,7 @@ import boardgame.Piece;
 import boardgame.Position;
 
 public abstract class ChessPiece extends Piece {
-	
+
 	private Color color;
 	private int moveCount;
 
@@ -17,44 +17,38 @@ public abstract class ChessPiece extends Piece {
 	public Color getColor() {
 		return color;
 	}
-	
+
 	public ChessPosition getChessPosition() {
 		return ChessPosition.fromPosition(position);
 	}
-	
+
 	public int getMoveCount() {
 		return moveCount;
 	}
-	
+
 	public void increaseMoveCount() {
 		moveCount++;
 	}
-	
+
 	public void decreaseMoveCount() {
 		moveCount--;
 	}
-	
+
 	protected boolean isThereOpponentPiece(Position position) {
-		ChessPiece p = (ChessPiece)getBoard().piece(position);
+		ChessPiece p = (ChessPiece) getBoard().piece(position);
 		return p != null && p.getColor() != color;
 	}
 
-	public void possibleMovePointer(Position auxPosition, boolean[][] matrix, int rowsOperator, int columnsOperator) {
+	public void possibleMovePointer(Position auxPosition, boolean[][] matrix,
+			boolean longMovCheck, int rowsOperator, int columnsOperator) {
 		
-		// empty position check
-		while (getBoard().positionExists(auxPosition) && !getBoard().thereIsAPiece(auxPosition)) {
+		// long movement piece check
+		if (longMovCheck) {
 			matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
-			// Cartesian coordinate system
 			auxPosition.setRow(auxPosition.getRow() + rowsOperator);
 			auxPosition.setColumn(auxPosition.getColumn() + columnsOperator);
-			
-		}
-		
-		// opponent held position check
-		if (getBoard().positionExists(auxPosition) && isThereOpponentPiece(auxPosition)) {
+		} else {
 			matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
 		}
-		
 	}
-	
 }

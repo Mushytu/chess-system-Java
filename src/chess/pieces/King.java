@@ -25,41 +25,46 @@ public class King extends ChessPiece {
 	public boolean[][] possibleMoves() {
 		boolean[][] matrix = new boolean[getBoard().getRows()][getBoard().getColumns()];
 		Position auxPosition = new Position(0, 0);
+		boolean longMovCheck = false;
 
 		// above - north
-		possibleMovePointer(auxPosition, matrix, -1, 0);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, -1, 0);
 
 		// above right - northeast
-		possibleMovePointer(auxPosition, matrix, -1, 1);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, -1, 1);
 
 		// right - east
-		possibleMovePointer(auxPosition, matrix, 0, 1);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, 0, 1);
 
 		// below right - southeast
-		possibleMovePointer(auxPosition, matrix, 1, 1);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, 1, 1);
 
 		// below - south
-		possibleMovePointer(auxPosition, matrix, 1, 0);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, 1, 0);
 
 		// below left - south-west
-		possibleMovePointer(auxPosition, matrix, 1, -1);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, 1, -1);
 
 		// left - west
-		possibleMovePointer(auxPosition, matrix, 0, -1);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, 0, -1);
 
 		// above left - northwest
-		possibleMovePointer(auxPosition, matrix, -1, -1);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, -1, -1);
 
 		return matrix;
 	}
 
 	// specific King method
-	public void possibleMovePointer(Position auxPosition, boolean[][] matrix, int rowsOperator, int columnsOperator) {
+	public void possibleMovePointer(Position auxPosition, boolean[][] matrix,
+			boolean longMovCheck, int rowsOperator, int columnsOperator) {
 		auxPosition.setValues(position.getRow() + rowsOperator, position.getColumn() + columnsOperator);
-
+		
+		// can piece make long moves?
+		longMovCheck = false;
+		
 		if (getBoard().positionExists(auxPosition) && canMove(auxPosition)) {
-			matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
-
+			super.possibleMovePointer(auxPosition, matrix, longMovCheck, rowsOperator,
+					columnsOperator);
 		}
 	}
 }
