@@ -70,8 +70,7 @@ public class UI {
 			if(chessMatch.getCheck()) {
 				System.out.println("CHECK!");
 			}
-		}
-		else {
+		} else {
 			System.out.println(ANSI_RED + "CHECKMATE!" + ANSI_RESET);
 				if (chessMatch.getCurrentPlayer() == Color.BLACK) {
 					System.out.println("WINNER: " + ANSI_YELLOW + chessMatch.getCurrentPlayer() + ANSI_RESET);

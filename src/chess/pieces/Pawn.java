@@ -21,7 +21,6 @@ public class Pawn extends ChessPiece {
 		boolean[][] matrix = new boolean[getBoard().getRows()][getBoard().getColumns()];
 		Position auxPosition = new Position(0, 0);
 		Position auxPosition2 = new Position(0, 0);
-		Position auxPosition3 = new Position(0, 0);
 		boolean longMovCheck = false;
 
 		// white pawn logic

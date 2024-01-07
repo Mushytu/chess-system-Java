@@ -5,15 +5,15 @@ import boardgame.Position;
 import chess.ChessPiece;
 import chess.Color;
 
-public class King extends ChessPiece {
+public class Knight extends ChessPiece {
 
-	public King(Board board, Color color) {
+	public Knight(Board board, Color color) {
 		super(board, color);
 	}
 
 	@Override
 	public String toString() {
-		return "K";
+		return "N";
 	}
 
 	private boolean canMove(Position position) {
@@ -27,29 +27,29 @@ public class King extends ChessPiece {
 		Position auxPosition = new Position(0, 0);
 		boolean longMovCheck = false;
 
-		// above - north
-		possibleMovePointer(auxPosition, matrix, longMovCheck, -1, 0);
+		// "L" right
+		possibleMovePointer(auxPosition, matrix, longMovCheck, -1, -2);
 
 		// above right - northeast
-		possibleMovePointer(auxPosition, matrix, longMovCheck, -1, 1);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, -2, -1);
 
 		// right - east
-		possibleMovePointer(auxPosition, matrix, longMovCheck, 0, 1);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, -2, 1);
 
 		// below right - southeast
-		possibleMovePointer(auxPosition, matrix, longMovCheck, 1, 1);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, -1, 2);
 
 		// below - south
-		possibleMovePointer(auxPosition, matrix, longMovCheck, 1, 0);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, 1, 2);
 
 		// below left - south-west
-		possibleMovePointer(auxPosition, matrix, longMovCheck, 1, -1);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, 2, 1);
 
 		// left - west
-		possibleMovePointer(auxPosition, matrix, longMovCheck, 0, -1);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, 2, -1);
 
 		// above left - northwest
-		possibleMovePointer(auxPosition, matrix, longMovCheck, -1, -1);
+		possibleMovePointer(auxPosition, matrix, longMovCheck, 1, -2);
 
 		return matrix;
 	}

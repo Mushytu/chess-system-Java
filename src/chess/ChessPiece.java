@@ -39,16 +39,22 @@ public abstract class ChessPiece extends Piece {
 		return p != null && p.getColor() != color;
 	}
 
-	public void possibleMovePointer(Position auxPosition, boolean[][] matrix,
-			boolean longMovCheck, int rowsOperator, int columnsOperator) {
-		
+	public void possibleMovePointer(Position auxPosition, boolean[][] matrix, boolean longMovCheck, int rowsOperator,
+			int columnsOperator) {
+
 		// long movement piece check
 		if (longMovCheck) {
 			matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
 			auxPosition.setRow(auxPosition.getRow() + rowsOperator);
 			auxPosition.setColumn(auxPosition.getColumn() + columnsOperator);
+			if (getBoard().positionExists(auxPosition) && isThereOpponentPiece(auxPosition)) {
+				matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
+			}
 		} else {
 			matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
+			if (getBoard().positionExists(auxPosition) && isThereOpponentPiece(auxPosition)) {
+				matrix[auxPosition.getRow()][auxPosition.getColumn()] = true;
+			}
 		}
 	}
 }

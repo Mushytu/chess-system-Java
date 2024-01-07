@@ -5,15 +5,15 @@ import boardgame.Position;
 import chess.ChessPiece;
 import chess.Color;
 
-public class Rook extends ChessPiece {
+public class Bishop extends ChessPiece {
 
-	public Rook(Board board, Color color) {
+	public Bishop(Board board, Color color) {
 		super(board, color);
 	}
 
 	@Override
 	public String toString() {
-		return "R";
+		return "B";
 	}
 
 	@Override
@@ -22,17 +22,17 @@ public class Rook extends ChessPiece {
 		Position auxPosition = new Position(0, 0);
 		boolean longMovCheck = false;
 
-		// above
-		possibleMovePointer(auxPosition, matrix, longMovCheck, -1, 0);
+		// above left - northwest
+		possibleMovePointer(auxPosition, matrix, longMovCheck, -1, -1);
 
-		// left
-		possibleMovePointer(auxPosition, matrix, longMovCheck, 0, -1);
+		// above right - northeast
+		possibleMovePointer(auxPosition, matrix, longMovCheck, -1, 1);
 
-		// right
-		possibleMovePointer(auxPosition, matrix, longMovCheck, 0, 1);
+		// below right - southeast
+		possibleMovePointer(auxPosition, matrix, longMovCheck, 1, 1);
 
-		// below
-		possibleMovePointer(auxPosition, matrix, longMovCheck, 1, 0);
+		// below left - south-west
+		possibleMovePointer(auxPosition, matrix, longMovCheck, 1, -1);
 
 		return matrix;
 	}
